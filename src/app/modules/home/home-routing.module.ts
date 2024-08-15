@@ -6,6 +6,24 @@ import { BottomComponent } from './pages/bottom/bottom.component';
 import { SideComponent } from './pages/side/side.component';
 import { LeftComponent } from './pages/left/left.component';
 
+const typeRoutes: Routes = [
+  {
+    path: 'type-a',
+    outlet: 'left-content',
+    loadChildren: () => import('../type-a/type-a.module').then(m => m.TypeAModule)
+  },
+  {
+    path: 'type-b',
+    outlet: 'left-content',
+    loadChildren: () => import('../type-b/type-b.module').then(m => m.TypeBModule)
+  },
+  {
+    path: 'type-c',
+    outlet: 'left-content',
+    loadChildren: () => import('../type-c/type-c.module').then(m => m.TypeCModule)
+  }
+];
+
 const routes: Routes = [
   {
     path: '',
@@ -52,14 +70,9 @@ const routes: Routes = [
           {
             path: 'map',
             loadChildren: () => import('../map/map.module').then(m => m.MapModule)
-          }
+          },
+          ...typeRoutes
         ]
-      },
-
-      {
-        path: '',
-        component: LeftComponent,
-        outlet: 'left-content'
       },
 
       {
@@ -72,7 +85,9 @@ const routes: Routes = [
         path: '',
         component: BottomComponent,
         outlet: 'bottom-content'
-      }
+      },
+
+      ...typeRoutes
     ]
   }
 ];
